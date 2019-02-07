@@ -3,14 +3,14 @@ public class QueenBoard {
   public QueenBoard(int size) {
     board = new int[size][size];
   }
-  private boolean addQueen(int r, int c) {
+  public boolean addQueen(int r, int c) {
     if (board[r][c] != 0) {
       return false;
     }
     board[r][c] = -1;
     return true;
   }
-  private boolean removeQueen(int r, int c) {
+  public boolean removeQueen(int r, int c) {
     if (board[r][c] != -1) {
       return false;
     }
@@ -18,16 +18,18 @@ public class QueenBoard {
     return true;
   }
   public String toString() {
+    String ans = "";
     for (int x = 0; x < board.length; x++) {
       for (int i = 0; i < board[0].length; i++) {
         if (board[x][i] == -1) {
-          System.out.print("Q");
+          ans += "Q";
         }
         else {
-          System.out.printl("_");
+          ans += "_";
         }
       }
-      System.out.println();
+      ans += "\n";
     }
+    return ans;
   }
 }
