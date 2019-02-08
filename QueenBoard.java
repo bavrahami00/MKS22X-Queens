@@ -8,17 +8,13 @@ public class QueenBoard {
       return false;
     }
     board[c][r] = -1;
-    for (int x = r+1; x < board[0].length; x++) {
-      for (int i = 0; i < board.length; i++) {
-        if (i-x == c-r) {
-          board[i][x] += 1;
-        }
-        else if (i == c) {
-          board[i][x] += 1;
-        }
-        else if (i+x == c+r) {
-          board[i][x] += 1;
-        }
+    for (int x = r+1; x < board.length; x++) {
+      if (c-x+r >= 0) {
+        board[c-x+r][x] += 1;
+      }
+      board[c][x] += 1;
+      if (c+x-r < board[0].length) {
+        board[c+x-r][x] += 1;
       }
     }
     return true;
@@ -28,17 +24,13 @@ public class QueenBoard {
       return false;
     }
     board[c][r] = 0;
-    for (int x = r+1; x < board[0].length; x++) {
-      for (int i = 0; i < board.length; i++) {
-        if (i-x == c-r) {
-          board[i][x] -= 1;
-        }
-        else if (i == c) {
-          board[i][x] -= 1;
-        }
-        else if (i+x == c+r) {
-          board[i][x] -= 1;
-        }
+    for (int x = r+1; x < board.length; x++) {
+      if (c-x+r >= 0) {
+        board[c-x+r][x] -= 1;
+      }
+      board[c][x] -= 1;
+      if (c+x-r < board[0].length) {
+        board[c+x-r][x] -= 1;
       }
     }
     return true;
@@ -74,6 +66,13 @@ public class QueenBoard {
   public boolean solve() {
     if (isEmpty()) {
       throw new IllegalStateException();
+    }
+    for (int x = 0; x < board[0].length; x++) {
+      boolean does = true;
+      boolean made = false;
+      for (int i = 0; i < board.length && does; i++) {
+
+      }
     }
     return false;
   }
