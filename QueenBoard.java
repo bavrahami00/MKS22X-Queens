@@ -4,28 +4,40 @@ public class QueenBoard {
     board = new int[size][size];
   }
   public boolean addQueen(int r, int c) {
-    if (board[r][c] != 0) {
+    if (board[c][r] != 0) {
       return false;
     }
-    board[r][c] = -1;
-    for (int x = r+1; x < board.length; x++) {
-      for (int i = 0; i < board[x].length; i++) {
+    board[c][r] = -1;
+    for (int x = r+1; x < board[0].length; x++) {
+      for (int i = 0; i < board.length; i++) {
         if (i-x == c-r) {
-          board[x][i] += 1;
+          board[i][x] += 1;
+        }
+        else if (i == c) {
+          board[i][x] += 1;
+        }
+        else if (i+x == c+r) {
+          board[i][x] += 1;
         }
       }
     }
     return true;
   }
   public boolean removeQueen(int r, int c) {
-    if (board[r][c] != -1) {
+    if (board[c][r] != -1) {
       return false;
     }
-    board[r][c] = 0;
-    for (int x = r+1; x < board.length; x++) {
-      for (int i = 0; i < board[x].length; i++) {
+    board[c][r] = 0;
+    for (int x = r+1; x < board[0].length; x++) {
+      for (int i = 0; i < board.length; i++) {
         if (i-x == c-r) {
-          board[x][i] -= 1;
+          board[i][x] -= 1;
+        }
+        else if (i == c) {
+          board[i][x] -= 1;
+        }
+        else if (i+x == c+r) {
+          board[i][x] -= 1;
         }
       }
     }
@@ -33,13 +45,13 @@ public class QueenBoard {
   }
   public String toString() {
     String ans = "";
-    for (int x = 0; x < board.length; x++) {
-      for (int i = 0; i < board[x].length; i++) {
-        if (board[x][i] == -1) {
+    for (int x = 0; x < board[0].length; x++) {
+      for (int i = 0; i < board.length; i++) {
+        if (board[i][x] == -1) {
           ans += "Q ";
         }
-        else if (board[x][i] > 0) {
-          ans += "# ";
+        else if (board[i][x] > 0) {
+          ans += board[i][x] + " ";
         }
         else {
           ans += "_ ";
@@ -50,9 +62,9 @@ public class QueenBoard {
     return ans;
   }
   private boolean isEmpty() {
-    for (int x = 0; x < board.length; x++) {
-      for (int i = 0; i < board[x].length; i++) {
-        if (board[x][i] != 0) {
+    for (int x = 0; x < board[0].length; x++) {
+      for (int i = 0; i < board.length; i++) {
+        if (board[i][x] != 0) {
           return true;
         }
       }
