@@ -67,11 +67,24 @@ public class QueenBoard {
     if (isEmpty()) {
       throw new IllegalStateException();
     }
-    for (int x = 0; x < board[0].length; x++) {
-      boolean does = true;
-      boolean made = false;
-      for (int i = 0; i < board.length && does; i++) {
-
+    return helper(0,0);
+  }
+  public boolean helper(int row, int col) {
+    for (int x = col; x < board[0].length; x++) {
+      if (addQueen(row,x)) {
+        if (row == board.length - 1) {
+          return true;
+        }
+        return helper(row+1,0);
+      }
+    }
+    for (int i = 0; i < board.length; i++) {
+      if (board[i][row-1] == -1) {
+        if (row == 1 && i == board.length - 1) {
+          return false;
+        }
+        removeQueen(row-1,i);
+        return helper(row-1,i+1);
       }
     }
     return false;
