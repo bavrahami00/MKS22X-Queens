@@ -3,7 +3,7 @@ public class QueenBoard {
   public QueenBoard(int size) {
     board = new int[size][size];
   }
-  public boolean addQueen(int r, int c) {
+  private boolean addQueen(int r, int c) {
     if (board[c][r] != 0) {
       return false;
     }
@@ -19,7 +19,7 @@ public class QueenBoard {
     }
     return true;
   }
-  public boolean removeQueen(int r, int c) {
+  private boolean removeQueen(int r, int c) {
     if (board[c][r] != -1) {
       return false;
     }
@@ -41,9 +41,6 @@ public class QueenBoard {
       for (int i = 0; i < board.length; i++) {
         if (board[i][x] == -1) {
           ans += "Q ";
-        }
-        else if (board[i][x] > 0) {
-          ans += board[i][x] + " ";
         }
         else {
           ans += "_ ";
@@ -69,7 +66,7 @@ public class QueenBoard {
     }
     return helper(0,0);
   }
-  public boolean helper(int row, int col) {
+  private boolean helper(int row, int col) {
     for (int x = col; x < board[0].length; x++) {
       if (addQueen(row,x)) {
         if (row == board.length - 1) {
