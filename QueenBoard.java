@@ -77,10 +77,10 @@ public class QueenBoard {
     }
     for (int i = 0; i < board.length; i++) {
       if (board[i][row-1] == -1) {
+        removeQueen(row-1,i);
         if (row == 1 && i == board.length - 1) {
           return false;
         }
-        removeQueen(row-1,i);
         return helper(row-1,i+1);
       }
     }
