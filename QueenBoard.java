@@ -86,4 +86,38 @@ public class QueenBoard {
     }
     return false;
   }
+  public int countSolutions() {
+    if (isEmpty()) {
+      throw new IllegalStateException();
+    }
+    return countHelper(0,0);
+  }
+  private int countHelper(int row, int col) {
+//    System.out.println(row+","+col+","+"\n"+toString());
+    if (board.length == 1) {
+      return 1;
+    }
+    int make = 0;
+    for (int x = col; x < board[0].length; x++) {
+      if (addQueen(row,x)) {
+        if (row == board.length - 1) {
+          make = 1;
+          removeQueen(row,x);
+        }
+        else {
+          return countHelper(row+1,0);
+        }
+      }
+    }
+    for (int i = 0; i < board.length; i++) {
+      if (board[i][row-1] == -1) {
+        removeQueen(row-1,i);
+        if (row == 1 && i == board.length - 1) {
+          return make;
+        }
+        return make + countHelper(row-1,i+1);
+      }
+    }
+    return 0;
+  }
 }
