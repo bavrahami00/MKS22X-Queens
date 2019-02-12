@@ -61,6 +61,12 @@ public class QueenBoard {
     return false;
   }
   public boolean solve() {
+    if (board.length < 0) {
+      return false;
+    }
+    if (board.length == 0) {
+      return true;
+    }
     if (isEmpty()) {
       throw new IllegalStateException();
     }
@@ -87,16 +93,18 @@ public class QueenBoard {
     return false;
   }
   public int countSolutions() {
+    if (board.length < 1) {
+      return 0;
+    }
     if (isEmpty()) {
       throw new IllegalStateException();
+    }
+    if (board.length == 1) {
+      return 1;
     }
     return countHelper(0,0);
   }
   private int countHelper(int row, int col) {
-//    System.out.println(row+","+col+","+"\n"+toString());
-    if (board.length == 1) {
-      return 1;
-    }
     int make = 0;
     for (int x = col; x < board[0].length; x++) {
       if (addQueen(row,x)) {
